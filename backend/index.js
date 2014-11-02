@@ -1,6 +1,8 @@
 var Hapi = require('hapi');
 
-var server = Hapi.createServer('localhost', process.argv[2] || 8000);
+var server = Hapi.createServer('localhost', process.argv[2] || 8000, {
+  cors: true
+});
 
 var breaks = [{
     id: 1,
@@ -40,7 +42,7 @@ server.route({
   path: '/break/{id}',
   handler: function(request, reply) {
     if (request.params.id) {
-      if (request.params.id < breaks.length)  {
+      if (request.params.id < breaks.length) {
         return reply(breaks[request.params.id]);
       } else {
         return reply('Break not found.').code(404);

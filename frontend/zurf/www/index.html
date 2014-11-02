@@ -33,9 +33,9 @@
         <ion-content ng-controller="breaksCtrl">
             <ion-list>
                 <a ng-repeat="break in breaks" class="item item-thumbnail-left" href="#/break/{{break.id}}">
-                    <img src="{{break.image}}">
-                    <h2>{{break.name}}</h2>
-                    <p>{{break.type}}</p>
+                    <img ng-src="{{break.image}}">
+                    <h2 ng-bind="break.name"></h2>
+                    <p ng-bind="break.type"></p>
                 </a>
             </ion-list>
         </ion-content>
