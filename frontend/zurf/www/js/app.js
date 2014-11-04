@@ -21,15 +21,15 @@ angular.module('zurf', ['ionic'])
 .config(function($stateProvider, $urlRouterProvider) {
 
   // if none of the bellow states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/index');
+  $urlRouterProvider.otherwise('/breaks');
 
   $stateProvider.state('index', {
-    url: '/index',
-    templateUrl: 'templates/break-list.html'
+    url: '/breaks',
+    templateUrl: 'templates/surf-break-list.html'
   })
 
   .state('break', {
-    url: '/break/:id',
-    templateUrl: 'templates/break.html'
+    url: '/breaks/:id',
+    templateUrl: 'templates/surf-break.html'
   });
 });

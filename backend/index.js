@@ -39,7 +39,7 @@ server.route({
 
 server.route({
   method: 'GET',
-  path: '/break/{id}',
+  path: '/breaks/{id}',
   handler: function(request, reply) {
     if (request.params.id) {
       if (request.params.id > 0 && request.params.id <= breaks.length) {
