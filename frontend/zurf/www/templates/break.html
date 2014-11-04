@@ -1,0 +1,13 @@
+<ion-nav-bar class="bar-positive">
+    <ion-nav-back-button class="button-clear">
+        <i class="ion-arrow-left-c"></i> Back
+    </ion-nav-back-button>
+</ion-nav-bar>
+
+<ion-view title="Surf Break">
+    <ion-content ng-controller="breakCtrl">
+        <img ng-src="{{break.image}}">
+        <h2>{{break.name}}</h2>
+        <p>{{break.type}}</p>
+    </ion-content>
+</ion-view>

@@ -16,4 +16,20 @@ angular.module('zurf', ['ionic'])
       StatusBar.styleDefault();
     }
   });
+})
+
+.config(function($stateProvider, $urlRouterProvider) {
+
+  // if none of the bellow states are matched, use this as the fallback
+  $urlRouterProvider.otherwise('/index');
+
+  $stateProvider.state('index', {
+    url: '/index',
+    templateUrl: 'templates/break-list.html'
+  })
+
+  .state('break', {
+    url: '/break/:id',
+    templateUrl: 'templates/break.html'
+  });
 });
