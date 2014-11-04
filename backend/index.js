@@ -42,8 +42,8 @@ server.route({
   path: '/break/{id}',
   handler: function(request, reply) {
     if (request.params.id) {
-      if (request.params.id < breaks.length) {
-        return reply(breaks[request.params.id]);
+      if (request.params.id > 0 && request.params.id <= breaks.length) {
+        return reply(breaks[request.params.id - 1]);
       } else {
         return reply('Break not found.').code(404);
       }
