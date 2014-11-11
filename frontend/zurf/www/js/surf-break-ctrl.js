@@ -1,17 +1,30 @@
 var app = angular.module('zurf');
 
-app.controller('breakListCtrl', function($scope, $stateParams, surfBreakService) {
+app.controller('BreakListCtrl', function($scope, $state, surfBreakService) {
 
   surfBreakService.surfBreaks(function(data) {
-    $scope.breaks = data;
+
+    if ($state.is('tab.favorites')) {
+
+      $scope.breaks = data.filter(function(value) {
+        return value.favorite;
+      });
+
+    } else {
+
+      $scope.breaks = data;
+    }
+
   });
 
 });
 
-app.controller('breakDetailCtrl', function($scope, $stateParams, surfBreakService) {
+app.controller('BreakDetailCtrl', function($scope, $stateParams, surfBreakService) {
 
   surfBreakService.getSurfBreak($stateParams.id, function(data) {
+
     $scope.break = data;
+
   });
 
 });

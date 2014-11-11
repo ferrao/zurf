@@ -5,8 +5,8 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('zurf', ['ionic'])
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
+.run(function ($ionicPlatform) {
+  $ionicPlatform.ready(function () {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -18,18 +18,46 @@ angular.module('zurf', ['ionic'])
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function ($stateProvider, $urlRouterProvider) {
 
   // if none of the bellow states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/breaks');
+  $urlRouterProvider.otherwise('/tab/breaks');
 
-  $stateProvider.state('index', {
-    url: '/breaks',
-    templateUrl: 'templates/surf-break-list.html'
+  $stateProvider
+
+  // abstract state for the tabs directive
+  .state('tab', {
+    url: "/tab",
+    abstract: true,
+    templateUrl: "templates/tabs.html"
   })
 
-  .state('break', {
-    url: '/breaks/:id',
-    templateUrl: 'templates/surf-break.html'
-  });
+  .state('tab.favorites', {
+    url: '/favorites',
+    views: {
+      'tab-break-favorites': {
+        templateUrl: 'templates/surf-break-list.html',
+        controller: 'BreakListCtrl'
+      }
+    }
+  })
+
+  .state('tab.breaks', {
+      url: '/breaks',
+      views: {
+        'tab-break-list': {
+          templateUrl: 'templates/surf-break-list.html',
+          controller: 'BreakListCtrl'
+        }
+      }
+    })
+    .state('tab.break-detail', {
+      url: '/breaks/:id',
+      views: {
+        'tab-break-list': {
+          templateUrl: 'templates/surf-break-detail.html',
+          controller: 'BreakDetailCtrl'
+        }
+      }
+    });
 });
