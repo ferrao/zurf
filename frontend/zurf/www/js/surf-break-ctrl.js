@@ -4,15 +4,12 @@ app.controller('BreakListCtrl', function($scope, $state, surfBreakService) {
 
   surfBreakService.surfBreaks(function(data) {
 
-    if ($state.is('tab.favorites')) {
-
+    if ($state.is('tab.break-list')) {
+      $scope.breaks = data;
+    } else {
       $scope.breaks = data.filter(function(value) {
         return value.favorite;
       });
-
-    } else {
-
-      $scope.breaks = data;
     }
 
   });
