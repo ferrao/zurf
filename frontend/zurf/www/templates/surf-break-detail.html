@@ -4,5 +4,8 @@
         <h2>{{break.name}}</h2>
         <p>{{break.type}}</p>
         <p>{{break.direction}}</p>
+        <button class="button button-clear" ng-click="clickFav()">
+            <i class="icon" ng-class="{'ion-ios7-star-outline' : !fav, 'ion-ios7-star' : fav}"></i>
+        </button>
     </ion-content>
 </ion-view>

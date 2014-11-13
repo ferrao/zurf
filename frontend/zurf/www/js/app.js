@@ -45,7 +45,7 @@ angular.module('zurf', ['ionic'])
       url: '/favorites/:id',
       views: {
         'tab-break-list-fav': {
-          templateUrl: 'templates/surf-break-detail-fav.html',
+          templateUrl: 'templates/surf-break-detail.html',
           controller: 'BreakDetailCtrl'
         }
       }
