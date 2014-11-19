@@ -5,6 +5,7 @@ app.factory('surfBreakService', ['$http', function($http) {
   var urlBase = 'http://localhost:8000/breaks';
 
   return {
+
     surfBreaks: function() {
       return $http.get(urlBase).then(function(resp) {
           return resp.data;
@@ -12,6 +13,7 @@ app.factory('surfBreakService', ['$http', function($http) {
           console.error('ERR', err);
         });
     },
+
     getSurfBreak: function(id) {
       return $http.get(urlBase + '/' + id).then(function(resp) {
           return resp.data;

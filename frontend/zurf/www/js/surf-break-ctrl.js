@@ -3,8 +3,7 @@ var app = angular.module('zurf');
 app.controller('BreakListCtrl', function($scope, $state, surfBreakService) {
 
 
-  surfBreakService.surfBreaks()
-    .then(function(data) {
+  surfBreakService.surfBreaks().then(function(data) {
 
       if ($state.is('tab.break-list')) {
         $scope.breaks = data;
@@ -22,8 +21,7 @@ app.controller('BreakDetailCtrl', function($scope, $stateParams, surfBreakServic
 
   $scope.fav = false;
 
-  surfBreakService.getSurfBreak($stateParams.id)
-    .then(function(data) {
+  surfBreakService.getSurfBreak($stateParams.id).then(function(data) {
 
       $scope.break = data;
 
