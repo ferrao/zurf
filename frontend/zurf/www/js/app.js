@@ -21,12 +21,21 @@ angular.module('zurf', ['ionic'])
 .config(function($stateProvider, $urlRouterProvider) {
 
   // if none of the bellow states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/favorites');
+  $urlRouterProvider.otherwise('/login');
 
-  $stateProvider
+  $stateProvider.state('login', {
+    url: "/login",
+    templateUrl: 'templates/login.html',
+    controller: 'LoginCtrl'
+  })
+
+  .state('forgot-password', {
+    url: "/forgot",
+    templateUrl: 'templates/forgot-password.html',
+  })
 
   // abstract state for the tabs directive
-    .state('tab', {
+  .state('tab', {
     url: "/tab",
     abstract: true,
     templateUrl: "templates/tabs.html"
