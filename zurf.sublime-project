@@ -1,0 +1,14 @@
+{
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"path": "."
+		}
+	],
+  "ternjs": {
+        "exclude": [],
+        "libs": ["browser", "jquery"],
+        "plugins": { }
+  }
+}
