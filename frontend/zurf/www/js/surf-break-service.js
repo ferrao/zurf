@@ -1,6 +1,6 @@
 var app = angular.module('zurf');
 
-app.factory('surfBreakService', ['$http', function($http) {
+app.factory('SurfBreakService', ['$http', function($http) {
 
   var urlBase = 'http://localhost:8000/breaks';
 
