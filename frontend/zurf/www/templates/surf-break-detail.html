@@ -1,14 +1,17 @@
 <ion-view title="Surf Break">
     <ion-content ng-controller="BreakDetailCtrl">
         <div class="list card">
+
             <div class="item item-avatar">
                 <img ng-src="{{break.image}}">
                 <h2>{{break.name}}</h2>
                 <p>November 20, 18:00</p>
             </div>
+
             <div class="item item-body">
                 <img class="full-image" ng-src="{{break.image}}">
             </div>
+
             <div class="item tabs">
                 <div class="tab-item">
                     <p>{{break.type}}</p>
@@ -17,12 +20,41 @@
                     <p>{{break.direction}}</p>
                 </div>
             </div>
-            <div class="item center">
+
+            <div class="item">
                 <button class="button button-full button-positive" ng-click="clickFav()">
                     Favorite&nbsp;&nbsp;
                     <i class="icon" ng-class="{'ion-ios7-star-outline' : !fav, 'ion-ios7-star' : fav}"></i>
                 </button>
             </div>
+        </div>
+
+        <div class="list card">
+            <div class="item">
+                <p align="center">
+                    Watching this surf break right now?</br>
+                    Submit the Size and Quality of the Surf </br>
+                    and receive 100 points to move up!
+                </p>
+            </div>
+            <div class="item range range-positive">
+                <i class="icon ion-ios7-sunny-outline"></i>
+                <input type="range" name="size" min="1" max="5" value="1">
+                <i class="icon ion-ios7-sunny"></i>
+            </div>
+            <div class="item range range-positive">
+                <i class="icon ion-ios7-sunny-outline"></i>
+                <input type="range" name="quality" min="1" max="5" value="1">
+                <i class="icon ion-ios7-sunny"></i>
+            </div>
+
+            <div class="item">
+                <button class="button button-full button-positive" ng-click="">
+                    Submit Observation
+                </button>
+            </div>
+        </div>
+
         </div>
     </ion-content>
 </ion-view>
