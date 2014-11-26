@@ -9,7 +9,20 @@
             </div>
 
             <div class="item item-body">
-                <img class="full-image" ng-src="{{break.forecast.charts.swell}}">
+                <ion-slide-box>
+                    <ion-slide>
+                        <p>Swell</p>
+                        <img class="full-image" ng-src="{{break.forecast.charts.swell}}">
+                    </ion-slide>
+                    <ion-slide>
+                        <p>Wind</p>
+                        <img class="full-image" ng-src="{{break.forecast.charts.wind}}">
+                    </ion-slide>
+                    <ion-slide>
+                        <p>Period</p>
+                        <img class="full-image" ng-src="{{break.forecast.charts.period}}">
+                    </ion-slide>
+                </ion-slide-box>
             </div>
 
             <div class="item tabs">
