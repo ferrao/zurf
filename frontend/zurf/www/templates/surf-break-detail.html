@@ -2,10 +2,12 @@
     <ion-content ng-controller="BreakDetailCtrl">
         <div class="list card">
 
-            <div class="item item-avatar">
+            <div class="item item-thumbnail-left">
                 <img ng-src="{{break.image}}">
                 <h2>{{break.name}}</h2>
-                <p>{{break.date}}</p>
+                <p>{{break.date}}</br>
+                    <small>{{break.type}}, {{break.direction}}</small>
+                </p>
             </div>
 
             <div class="item item-body">
@@ -25,15 +27,6 @@
                 </ion-slide-box>
             </div>
 
-            <div class="item tabs">
-                <div class="tab-item">
-                    <p>{{break.type}}</p>
-                </div>
-                <div class="tab-item">
-                    <p>{{break.direction}}</p>
-                </div>
-            </div>
-
             <div class="item">
                 <button class="button button-full button-positive" ng-click="clickFav()">
                     Favorite&nbsp;&nbsp;
@@ -51,14 +44,14 @@
                 </p>
             </div>
             <div class="item range range-positive">
-                <i class="icon ion-ios7-sunny-outline"></i>
+                <i class="icon ion-ios7-analytics-outline"></i>
                 <input type="range" name="size" min="1" max="5" value="1">
-                <i class="icon ion-ios7-sunny"></i>
+                <i class="icon ion-ios7-analytics"></i>
             </div>
             <div class="item range range-positive">
-                <i class="icon ion-ios7-sunny-outline"></i>
+                <i class="icon ion-thumbsdown"></i>
                 <input type="range" name="quality" min="1" max="5" value="1">
-                <i class="icon ion-ios7-sunny"></i>
+                <i class="icon ion-thumbsup"></i>
             </div>
 
             <div class="item">
