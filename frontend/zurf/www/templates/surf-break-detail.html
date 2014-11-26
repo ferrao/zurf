@@ -5,11 +5,11 @@
             <div class="item item-avatar">
                 <img ng-src="{{break.image}}">
                 <h2>{{break.name}}</h2>
-                <p>November 20, 18:00</p>
+                <p>{{break.date}}</p>
             </div>
 
             <div class="item item-body">
-                <img class="full-image" ng-src="{{break.chart}}">
+                <img class="full-image" ng-src="{{break.forecast.charts.swell}}">
             </div>
 
             <div class="item tabs">

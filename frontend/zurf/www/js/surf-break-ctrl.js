@@ -20,10 +20,21 @@ app.controller('BreakDetailCtrl', function($scope, $stateParams, SurfBreakServic
   SurfBreakService.getSurfBreak($stateParams.id)
     .then(function(data) {
       $scope.break = data;
-      return MswService.getLastSwellChart($scope.break.mswid);
+      return MswService.getLastForecast($scope.break.mswid);
     })
     .then(function(data) {
-      $scope.break.chart = data;
+
+      var d = new Date(data.localTimestamp * 1000);
+
+      $scope.break.forecast = data;
+      $scope.break.date = d.toLocaleString('en-US', {
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: false
+      });
+
     });
 
   $scope.clickFav = function() {

@@ -7,10 +7,20 @@ app.factory('MswService', ['$http', function($http) {
 
   return {
 
-    getLastSwellChart: function(id) {
+    getLastForecast: function(id) {
 
-       return $http.get(urlBase + "?spot_id=" + id).then(function(resp) {
-          return resp.data[0].charts.swell;
+      return $http.get(urlBase + "?spot_id=" + id)
+        .then(function(resp) {
+
+          var i;
+
+          for (i = 0; i < resp.data.length - 1; i++) {
+            if (resp.data[i].timestamp * 1000 > Date.now()) {
+              break;
+            }
+          }
+
+          return resp.data[i];
         }, function(err) {
           console.error('ERR', err);
         });
