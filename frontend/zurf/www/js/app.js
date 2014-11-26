@@ -41,6 +41,15 @@ angular.module('zurf', ['ionic'])
     templateUrl: "templates/tabs.html"
   })
 
+  .state('tab.ranking', {
+    url: '/ranking',
+    views: {
+      'tab-ranking': {
+        templateUrl: 'templates/ranking.html',
+        controller: 'RankingCtrl'
+      }
+    }
+  })
   .state('tab.break-list-fav', {
       url: '/favorites',
       views: {
