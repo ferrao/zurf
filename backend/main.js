@@ -2,7 +2,7 @@
  * Configuration variables
  */
 var dbURI = 'mongodb://zurf:zurf@ds051980.mongolab.com:51980/zurf';
-var defaultPort = 8080;
+var defaultPort = 8090;
 var host = 'localhost';
 
 /**
@@ -25,4 +25,6 @@ var server = Hapi.createServer(host, process.argv[2] || defaultPort, {
 });
 
 routes.load(server);
+
+console.log("Starting server...");
 server.start();

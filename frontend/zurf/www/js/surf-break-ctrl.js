@@ -7,7 +7,7 @@ app.controller('BreakListCtrl', function($scope, $state, SurfBreakService) {
         $scope.breaks = data;
       } else {
         $scope.breaks = data.filter(function(value) {
-          return value.favorite;
+          return (value.id % 2) === 0;
         });
       }
     });

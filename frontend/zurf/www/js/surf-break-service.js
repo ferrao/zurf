@@ -2,7 +2,7 @@ var app = angular.module('zurf');
 
 app.factory('SurfBreakService', ['$http', function($http) {
 
-  var urlBase = 'http://localhost:8000/breaks';
+  var urlBase = 'http://localhost:8090/spots';
 
   return {
 

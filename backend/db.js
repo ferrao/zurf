@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 
 exports.init = function(uri) {
+
+  console.log('Connecting to database...');
   mongoose.connect(uri);
 
   // Connection successful
@@ -31,5 +33,5 @@ exports.init = function(uri) {
 // Loading Schemas
 exports.model = {
   spot: require('./model/spot')
-//  user: require('./model/user')
+    //  user: require('./model/user')
 };
