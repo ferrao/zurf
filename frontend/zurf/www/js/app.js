@@ -46,7 +46,7 @@ angular.module('zurf', ['ionic'])
     views: {
       'tab-ranking': {
         templateUrl: 'templates/ranking.html',
-        controller: 'RankingCtrl'
+        controller: 'UserListCtrl'
       }
     }
   })

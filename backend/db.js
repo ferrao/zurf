@@ -1,6 +1,15 @@
 var mongoose = require('mongoose');
 
-exports.init = function(uri) {
+
+/**
+ * [init description]
+ * @param  {String} uri   The database connection URI
+ * @param  {Boolean} debug Debug mode
+ */
+exports.init = function(uri, debug) {
+
+  //Configure debug settings
+  mongoose.set('debug', debug === true ? true : false);
 
   console.log('Connecting to database...');
   mongoose.connect(uri);
@@ -32,6 +41,6 @@ exports.init = function(uri) {
 
 // Loading Schemas
 exports.model = {
+  user: require('./model/user'),
   spot: require('./model/spot')
-    //  user: require('./model/user')
 };

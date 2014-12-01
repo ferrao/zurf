@@ -18,4 +18,4 @@ var spotSchema = new mongoose.Schema({
   size: { type: Number, min: 1, max: 5 },
 });
 
-module.exports = mongoose.model('Spot', spotSchema);
+module.exports = mongoose.model('spots', spotSchema);

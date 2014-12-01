@@ -1,4 +1,5 @@
 var spotCtrl = require('./controller/spot-ctrl');
+var userCtrl = require('./controller/user-ctrl');
 
 /**
  * Loads API routes
@@ -8,6 +9,7 @@ exports.load = function(server) {
   console.log('Loading server routes');
   exports.root(server);
   exports.users(server);
+  exports.user(server);
   exports.spots(server);
   exports.spot(server);
 };
@@ -35,6 +37,24 @@ exports.root = function(server) {
  */
 exports.users = function(server) {
   console.log('Route GET /users');
+  server.route({
+    method: 'GET',
+    path: '/users',
+    handler: userCtrl.getUserList
+  });
+};
+
+/**
+ * GET /users/{id}
+ * @param  {Hapi.Server} server The hapi server
+ */
+exports.user = function(server) {
+  console.log('Route GET /users/{id}');
+  server.route({
+    method: 'GET',
+    path: '/users/{id}',
+    handler: userCtrl.getUser
+  });
 };
 
 /**
@@ -51,9 +71,8 @@ exports.spots = function(server) {
 };
 
 /**
- * GET /breaks/{id}
+ * GET /spots/{id}
  * @param  {Hapi.Server} server The hapi server
- * @return {[type]}        [description]
  */
 exports.spot = function(server) {
   console.log('Route GET /spots/{id}');

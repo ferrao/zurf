@@ -5,7 +5,7 @@ app.controller('BreakListCtrl', function($scope, $state, SurfBreakService) {
     .then(function(data) {
       if ($state.is('tab.break-list')) {
         $scope.breaks = data;
-      } else {
+      } else if ($state.is('tab.break-list-fav')) {
         $scope.breaks = data.filter(function(value) {
           return (value.id % 2) === 0;
         });

@@ -15,7 +15,7 @@ var routes = require('./routes');
 /**
  * DB connection
  */
-db.init(dbURI);
+db.init(dbURI, true);
 
 /**
  * Hapi Server
