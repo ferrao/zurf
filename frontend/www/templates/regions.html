@@ -1,9 +1,18 @@
 <ion-view title="List of Surf Breaks">
     <ion-content ng-controller="RegionsCtrl">
+
+        <div class="list list-inset">
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="text" placeholder="Search">
+            </label>
+        </div>
+
         <ion-list>
             <a ng-repeat="region in regions" class="item" href="#/tab/regions/breaks">
             {{region.name}}
             </a>
         </ion-list>
+
     </ion-content>
 </ion-view>
