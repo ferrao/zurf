@@ -42,5 +42,6 @@ exports.init = function(uri, debug) {
 // Loading Schemas
 exports.model = {
   user: require('./model/user'),
-  spot: require('./model/spot')
+  spot: require('./model/spot'),
+  region: require('./model/region')
 };

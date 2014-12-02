@@ -42,15 +42,15 @@ angular.module('zurf', ['ionic'])
   })
 
   .state('tab.ranking', {
-    url: '/ranking',
-    views: {
-      'tab-ranking': {
-        templateUrl: 'templates/ranking.html',
-        controller: 'UserListCtrl'
+      url: '/ranking',
+      views: {
+        'tab-ranking': {
+          templateUrl: 'templates/ranking.html',
+          controller: 'UserListCtrl'
+        }
       }
-    }
-  })
-  .state('tab.break-list-fav', {
+    })
+    .state('tab.break-list-fav', {
       url: '/favorites',
       views: {
         'tab-break-list-fav': {
@@ -69,19 +69,29 @@ angular.module('zurf', ['ionic'])
       }
     })
 
-  .state('tab.break-list', {
+  .state('tab.regions', {
+    url: '/regions',
+    views: {
+      'tab-regions': {
+        templateUrl: 'templates/regions.html',
+        controller: 'RegionsCtrl'
+      }
+    }
+  })
+
+  .state('tab.regions.break-list', {
       url: '/breaks',
       views: {
-        'tab-break-list': {
+        'tab-regions@tab': {
           templateUrl: 'templates/surf-break-list.html',
           controller: 'BreakListCtrl'
         }
       }
     })
-    .state('tab.break-detail', {
+    .state('tab.regions.break-detail', {
       url: '/breaks/:id',
       views: {
-        'tab-break-list': {
+        'tab-regions@tab': {
           templateUrl: 'templates/surf-break-detail.html',
           controller: 'BreakDetailCtrl'
         }

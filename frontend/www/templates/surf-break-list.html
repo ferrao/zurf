@@ -1,7 +1,7 @@
 <ion-view title="List of Surf Breaks">
     <ion-content ng-controller="BreakListCtrl">
         <ion-list>
-            <a ng-repeat="break in breaks" class="item item-thumbnail-left" href="#/tab/breaks/{{break.id}}">
+            <a ng-repeat="break in breaks" class="item item-thumbnail-left" href="#/tab/regions/breaks/{{break.id}}">
                 <img ng-src="{{break.image}}">
                 <h2>{{break.name}}</h2>
                 <p>{{break.type}}</p>

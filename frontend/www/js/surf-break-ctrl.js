@@ -1,9 +1,16 @@
 var app = angular.module('zurf');
 
+app.controller('RegionsCtrl', function($scope, SurfBreakService) {
+  SurfBreakService.getRegions()
+    .then(function(data) {
+      $scope.regions = data;
+    });
+});
+
 app.controller('BreakListCtrl', function($scope, $state, SurfBreakService) {
   SurfBreakService.surfBreaks()
     .then(function(data) {
-      if ($state.is('tab.break-list')) {
+      if ($state.is('tab.regions.break-list')) {
         $scope.breaks = data;
       } else if ($state.is('tab.break-list-fav')) {
         $scope.breaks = data.filter(function(value) {

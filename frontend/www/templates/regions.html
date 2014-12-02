@@ -1,0 +1,9 @@
+<ion-view title="List of Surf Breaks">
+    <ion-content ng-controller="RegionsCtrl">
+        <ion-list>
+            <a ng-repeat="region in regions" class="item" href="#/tab/regions/breaks">
+            {{region.name}}
+            </a>
+        </ion-list>
+    </ion-content>
+</ion-view>

@@ -1,5 +1,6 @@
 var spotCtrl = require('./controller/spot-ctrl');
 var userCtrl = require('./controller/user-ctrl');
+var regionCtrl = require('./controller/region-ctrl');
 
 /**
  * Loads API routes
@@ -12,6 +13,7 @@ exports.load = function(server) {
   exports.user(server);
   exports.spots(server);
   exports.spot(server);
+  exports.regions(server);
 };
 
 /**
@@ -56,6 +58,20 @@ exports.user = function(server) {
     handler: userCtrl.getUser
   });
 };
+
+/**
+ * GET /regions
+ * @param  {Hapi.Server} server The hapi server
+ */
+exports.regions = function(server) {
+  console.log('Route GET /regions');
+  server.route({
+    method: 'GET',
+    path: '/regions',
+    handler: regionCtrl.getRegions
+  });
+};
+
 
 /**
  * GET /spots
