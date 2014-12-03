@@ -14,10 +14,21 @@ exports.getUserList = function(request, reply) {
   var promise = findUsers.exec();
 
   promise.then(function(events) {
-    reply(events);
-  }, function(err) {
-    reply(boom.badImplementation(err));
-  });
+
+      if (events.length < 1) {
+        throw boom.notFound('No users found');
+      }
+
+      reply(events);
+
+    })
+    .then(null, function(err) {
+      if (err.isBoom) {
+        reply(err);
+      } else {
+        reply(boom.badImplementation(err));
+      }
+    });
 };
 
 /**
@@ -38,12 +49,19 @@ exports.getUser = function(request, reply) {
   var promise = findUsersById.exec();
 
   promise.then(function(events) {
-    if (events.length > 0) {
+
+      if (events.length < 1) {
+        throw boom.notFound('User not found');
+      }
+
       reply(events[0]);
-    } else {
-      reply(boom.notFound());
-    }
-  }, function(err) {
-    reply(boom.badImplementation(err));
-  });
+
+    })
+    .then(null, function(err) {
+      if (err.isBoom) {
+        reply(err);
+      } else {
+        reply(boom.badImplementation(err));
+      }
+    });
 };

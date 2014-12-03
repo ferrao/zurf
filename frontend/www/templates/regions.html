@@ -9,7 +9,7 @@
         </div>
 
         <ion-list>
-            <a ng-repeat="region in regions" class="item" href="#/tab/regions/breaks">
+            <a ng-repeat="region in regions" class="item" href="#/tab/regions/breaks?region={{region.id}}">
             {{region.name}}
             </a>
         </ion-list>

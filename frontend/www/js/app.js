@@ -60,7 +60,7 @@ angular.module('zurf', ['ionic'])
       }
     })
     .state('tab.break-detail-fav', {
-      url: '/favorites/:id',
+      url: '/favorites/{id}',
       views: {
         'tab-break-list-fav': {
           templateUrl: 'templates/surf-break-detail.html',
@@ -78,9 +78,8 @@ angular.module('zurf', ['ionic'])
       }
     }
   })
-
   .state('tab.regions.break-list', {
-      url: '/breaks',
+      url: '/breaks?region',
       views: {
         'tab-regions@tab': {
           templateUrl: 'templates/surf-break-list.html',
@@ -89,7 +88,7 @@ angular.module('zurf', ['ionic'])
       }
     })
     .state('tab.regions.break-detail', {
-      url: '/breaks/:id',
+      url: '/breaks/{id}',
       views: {
         'tab-regions@tab': {
           templateUrl: 'templates/surf-break-detail.html',

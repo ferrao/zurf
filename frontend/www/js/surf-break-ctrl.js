@@ -7,15 +7,16 @@ app.controller('RegionsCtrl', function($scope, SurfBreakService) {
     });
 });
 
-app.controller('BreakListCtrl', function($scope, $state, SurfBreakService) {
-  SurfBreakService.surfBreaks()
+app.controller('BreakListCtrl', function($scope, $state, $stateParams, SurfBreakService) {
+
+  SurfBreakService.surfBreaks($stateParams.region)
     .then(function(data) {
-      if ($state.is('tab.regions.break-list')) {
-        $scope.breaks = data;
-      } else if ($state.is('tab.break-list-fav')) {
+      if ($state.is('tab.break-list-fav')) {
         $scope.breaks = data.filter(function(value) {
           return (value.id % 2) === 0;
         });
+      } else {
+        $scope.breaks = data;
       }
     });
 });

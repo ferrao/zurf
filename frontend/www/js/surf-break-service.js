@@ -8,8 +8,11 @@ app.factory('SurfBreakService', ['$http', function($http) {
 
   return {
 
-    surfBreaks: function() {
-      return $http.get(urlBase + '/' + spotsRoute)
+    surfBreaks: function(region) {
+
+      var url = urlBase + '/' + spotsRoute + (region ? '/region/' + region : '');
+
+      return $http.get(url)
         .then(function(resp) {
           return resp.data;
         }, function(err) {
@@ -18,7 +21,10 @@ app.factory('SurfBreakService', ['$http', function($http) {
     },
 
     getSurfBreak: function(id) {
-      return $http.get(urlBase + '/' + spotsRoute + '/' + id)
+
+      var url = urlBase + '/' + spotsRoute + '/' + id;
+
+      return $http.get(url)
         .then(function(resp) {
           return resp.data;
         }, function(err) {
@@ -27,7 +33,10 @@ app.factory('SurfBreakService', ['$http', function($http) {
     },
 
     getRegions: function() {
-      return $http.get(urlBase + '/' + regionsRoute)
+
+      var url = urlBase + '/' + regionsRoute;
+
+      return $http.get(url)
         .then(function(resp) {
           return resp.data;
         }, function(err) {

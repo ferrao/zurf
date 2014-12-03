@@ -14,8 +14,19 @@ exports.getRegions = function(request, reply) {
   var promise = findRegions.exec();
 
   promise.then(function(events) {
-    reply(events);
-  }, function(err) {
-    reply(boom.badImplementation(err));
-  });
+
+      if (events.length < 1) {
+        throw boom.notFound('No regions found');
+      }
+
+      reply(events);
+
+    })
+    .then(null, function(err) {
+      if (err.isBoom) {
+        reply(err);
+      } else {
+        reply(boom.badImplementation(err));
+      }
+    });
 };
