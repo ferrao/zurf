@@ -8,15 +8,16 @@ var boom = require('boom');
  * @param  {Reply} reply   The server reply
  */
 exports.getUserList = function(request, reply) {
-  db.model.user.find()
+  var findUsers = db.model.user.find()
     .sort('-points')
-    .find({}, function(err, events) {
-      if (!err) {
-        reply(events);
-      } else {
-        reply(boom.badImplementation(err));
-      }
-    });
+    .find({});
+  var promise = findUsers.exec();
+
+  promise.then(function(events) {
+    reply(events);
+  }, function(err) {
+    reply(boom.badImplementation(err));
+  });
 };
 
 /**
@@ -25,19 +26,24 @@ exports.getUserList = function(request, reply) {
  * @param  {Reply} reply   The server reply
  */
 exports.getUser = function(request, reply) {
-  if (request.params.id) {
-    db.model.user.find({
-      id: request.params.id
-    }, function(err, events) {
-      if (!err) {
-        if (events.length > 0) {
-          reply(events[0]);
-        } else {
-          reply(boom.notFound(err));
-        }
-      } else {
-        reply(boom.badImplementation(err));
-      }
-    });
+
+  if (!request.params.id) {
+    reply(boom.notFound());
+    return;
   }
+
+  var findUsersById = db.model.user.find({
+    id: request.params.id
+  });
+  var promise = findUsersById.exec();
+
+  promise.then(function(events) {
+    if (events.length > 0) {
+      reply(events[0]);
+    } else {
+      reply(boom.notFound());
+    }
+  }, function(err) {
+    reply(boom.badImplementation(err));
+  });
 };

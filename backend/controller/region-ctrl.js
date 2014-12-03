@@ -8,13 +8,14 @@ var boom = require('boom');
  * @param  {Reply} reply   The server reply
  */
 exports.getRegions = function(request, reply) {
-  db.model.region.find()
+  var findRegions = db.model.region.find()
     .sort('id')
-    .find({}, function(err, events) {
-      if (!err) {
-        reply(events);
-      } else {
-        reply(boom.badImplementation(err));
-      }
-    });
+    .find({});
+  var promise = findRegions.exec();
+
+  promise.then(function(events) {
+    reply(events);
+  }, function(err) {
+    reply(boom.badImplementation(err));
+  });
 };

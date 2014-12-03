@@ -11,9 +11,10 @@ exports.load = function(server) {
   exports.root(server);
   exports.users(server);
   exports.user(server);
-  exports.spots(server);
-  exports.spot(server);
   exports.regions(server);
+  exports.spots(server);
+  exports.spotsByRegion(server);
+  exports.spot(server);
 };
 
 /**
@@ -96,5 +97,18 @@ exports.spot = function(server) {
     method: 'GET',
     path: '/spots/{id}',
     handler: spotCtrl.getSpot
+  });
+};
+
+/**
+ * GET /spots/region/{id}
+ * @param  {Hapi.Server} server The hapi server
+ */
+exports.spotsByRegion = function(server) {
+  console.log('Route GET /spots/region/{id}');
+  server.route({
+    method: 'GET',
+    path: '/spots/region/{id}',
+    handler: spotCtrl.getSpotsByRegion
   });
 };

@@ -7,13 +7,60 @@ var boom = require('boom');
  * @param  {Reply} reply   The server reply
  */
 exports.getSpotList = function(request, reply) {
-  db.model.spot.find({}, function(err, events) {
-    if (!err) {
-      reply(events);
-    } else {
-      reply(boom.badImplementation(err));
-    }
+  var findSpots = db.model.spot.find({});
+  var promise = findSpots.exec();
+
+  promise.then(function(events) {
+    reply(events);
+  }, function(err) {
+    reply(boom.badImplementation(err));
   });
+};
+
+/**
+ * Server handler that responds to request with list of spots fetched from database,
+ * for a specific region
+ * @param  {Request} request The server request
+ * @param  {Reply} reply   The server reply
+ */
+exports.getSpotsByRegion = function(request, reply) {
+
+  if (!request.params.id) {
+    reply(boom.notFound());
+    return;
+  }
+
+  var getRegionSpots = db.model.region.find({
+      id: request.params.id
+    })
+    .select('spots');
+  var promise = getRegionSpots.exec();
+
+  promise.then(function(events) {
+
+      if (events.length < 1) {
+        throw boom.notFound('Region not found');
+      }
+
+      var ids = events[0].spots;
+      var findSpotsByIds = db.model.spot.find({
+        id: {
+          $in: ids
+        }
+      });
+
+      return findSpotsByIds.exec();
+    })
+    .then(function(events) {
+      reply(events);
+    })
+    .then(null, function(err) {
+      if (err.isBoom) {
+        reply(err);
+      } else {
+        reply(boom.badImplementation(err));
+      }
+    });
 };
 
 /**
@@ -22,19 +69,24 @@ exports.getSpotList = function(request, reply) {
  * @param  {Reply} reply   The server reply
  */
 exports.getSpot = function(request, reply) {
-  if (request.params.id) {
-    db.model.spot.find({
-      id: request.params.id
-    }, function(err, events) {
-      if (!err) {
-        if (events.length > 0) {
-          reply(events[0]);
-        } else {
-          reply(boom.notFound(err));
-        }
-      } else {
-        reply(boom.badImplementation(err));
-      }
-    });
+
+  if (!request.params.id) {
+    reply(boom.notFound());
+    return;
   }
+
+  var findSpotsById = db.model.spot.find({
+    id: request.params.id
+  });
+  var promise = findSpotsById.exec();
+
+  promise.then(function(events) {
+    if (events.length > 0) {
+      reply(events[0]);
+    } else {
+      reply(boom.notFound());
+    }
+  }, function(err) {
+    reply(boom.badImplementation(err));
+  });
 };

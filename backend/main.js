@@ -26,5 +26,6 @@ var server = Hapi.createServer(host, process.argv[2] || defaultPort, {
 
 routes.load(server);
 
-console.log("Starting server...");
+//server.log(['server'],'Starting server...');
+console.log('Starting server...');
 server.start();
