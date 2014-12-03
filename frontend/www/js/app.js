@@ -23,7 +23,12 @@ angular.module('zurf', ['ionic'])
   // if none of the bellow states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
 
-  $stateProvider.state('login', {
+  $stateProvider.state('error', {
+    url: "/error",
+    templateUrl: 'templates/error.html'
+  })
+
+  .state('login', {
     url: "/login",
     templateUrl: 'templates/login.html',
     controller: 'LoginCtrl'
@@ -70,15 +75,15 @@ angular.module('zurf', ['ionic'])
     })
 
   .state('tab.regions', {
-    url: '/regions',
-    views: {
-      'tab-regions': {
-        templateUrl: 'templates/regions.html',
-        controller: 'RegionsCtrl'
+      url: '/regions',
+      views: {
+        'tab-regions': {
+          templateUrl: 'templates/regions.html',
+          controller: 'RegionsCtrl'
+        }
       }
-    }
-  })
-  .state('tab.regions.break-list', {
+    })
+    .state('tab.regions.break-list', {
       url: '/breaks?region',
       views: {
         'tab-regions@tab': {

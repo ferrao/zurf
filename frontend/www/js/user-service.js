@@ -11,7 +11,8 @@ app.factory('UserService', ['$http', function($http) {
         .then(function(resp) {
           return resp.data;
         }, function(err) {
-          console.error('ERR', err);
+          console.error('Error in UserService.users() :', err);
+          throw err;
         });
     },
 
@@ -20,7 +21,8 @@ app.factory('UserService', ['$http', function($http) {
         .then(function(resp) {
           return resp.data;
         }, function(err) {
-          console.error('ERR', err);
+          console.error('Error in UserService.getUser() :', err);
+          throw err;
         });
     }
   };

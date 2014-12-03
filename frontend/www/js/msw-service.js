@@ -12,6 +12,10 @@ app.factory('MswService', ['$http', function($http) {
       return $http.get(urlBase + "?spot_id=" + id)
         .then(function(resp) {
 
+          if (resp.data.error_response) {
+            throw new Error(resp.data.error_response);
+          }
+
           var i;
 
           for (i = 0; i < resp.data.length - 1; i++) {
@@ -21,10 +25,11 @@ app.factory('MswService', ['$http', function($http) {
           }
 
           return resp.data[i];
-        }, function(err) {
-          console.error('ERR', err);
-        });
 
+        }).then(null, function(err) {
+          console.error('Error in MswService.getLastForecast() :', err);
+          throw err;
+        });
     }
   };
 

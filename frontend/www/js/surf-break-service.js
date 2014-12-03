@@ -16,7 +16,8 @@ app.factory('SurfBreakService', ['$http', function($http) {
         .then(function(resp) {
           return resp.data;
         }, function(err) {
-          console.error('ERR', err);
+          console.error('Error in SurfBreakService.surfBreaks() :', err.data);
+          throw err;
         });
     },
 
@@ -28,7 +29,8 @@ app.factory('SurfBreakService', ['$http', function($http) {
         .then(function(resp) {
           return resp.data;
         }, function(err) {
-          console.error('ERR', err);
+          console.error('Error in SurfBreakService.surfBreaks() : ' , err.data);
+          throw err;
         });
     },
 
@@ -40,7 +42,8 @@ app.factory('SurfBreakService', ['$http', function($http) {
         .then(function(resp) {
           return resp.data;
         }, function(err) {
-          console.error('ERR', err);
+          console.error('Error in SurfBreakService.getRegions() : ' , err.data);
+          throw err;
         });
     }
   };

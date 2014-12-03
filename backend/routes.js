@@ -1,3 +1,4 @@
+var joi = require('joi');
 var spotCtrl = require('./controller/spot-ctrl');
 var userCtrl = require('./controller/user-ctrl');
 var regionCtrl = require('./controller/region-ctrl');
@@ -56,7 +57,14 @@ exports.user = function(server) {
   server.route({
     method: 'GET',
     path: '/users/{id}',
-    handler: userCtrl.getUser
+    handler: userCtrl.getUser,
+    config: {
+        validate: {
+            params: {
+                id: joi.number().integer().min(1).max(9999)
+            }
+        }
+    }
   });
 };
 
@@ -96,7 +104,14 @@ exports.spot = function(server) {
   server.route({
     method: 'GET',
     path: '/spots/{id}',
-    handler: spotCtrl.getSpot
+    handler: spotCtrl.getSpot,
+    config: {
+        validate: {
+            params: {
+                id: joi.number().integer().min(1).max(9999)
+            }
+        }
+    }
   });
 };
 
@@ -109,6 +124,13 @@ exports.spotsByRegion = function(server) {
   server.route({
     method: 'GET',
     path: '/spots/region/{id}',
-    handler: spotCtrl.getSpotsByRegion
+    handler: spotCtrl.getSpotsByRegion,
+    config: {
+        validate: {
+            params: {
+                id: joi.number().integer().min(1).max(9999)
+            }
+        }
+    }
   });
 };
