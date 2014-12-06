@@ -8,26 +8,26 @@ var boom = require('boom');
  * @param  {Reply} reply   The server reply
  */
 exports.getUserList = function(request, reply) {
-  var findUsers = db.model.user.find()
-    .sort('-points')
-    .find({});
-  var promise = findUsers.exec();
 
-  promise.then(function(events) {
+    var findUsers = db.model.user.find().sort('-points').find({});
+    var promise = findUsers.exec();
 
-      if (events.length < 1) {
-        throw boom.notFound('No users found');
-      }
+    promise.then(function(events) {
 
-      reply(events);
+        if (events.length < 1) {
+            throw boom.notFound('No users found');
+        }
 
-    })
-    .then(null, function(err) {
-      if (err.isBoom) {
-        reply(err);
-      } else {
-        reply(boom.badImplementation(err));
-      }
+        reply(events);
+
+    }).then(null, function(err) {
+
+        if (err.isBoom) {
+            reply(err);
+        } else {
+            reply(boom.badImplementation(err));
+        }
+
     });
 };
 
@@ -38,30 +38,33 @@ exports.getUserList = function(request, reply) {
  */
 exports.getUser = function(request, reply) {
 
-  if (!request.params.id) {
-    reply(boom.notFound());
-    return;
-  }
+    var findUsersById, promise;
 
-  var findUsersById = db.model.user.find({
-    id: request.params.id
-  });
-  var promise = findUsersById.exec();
+    if (!request.params.id) {
+        reply(boom.notFound());
+        return;
+    }
 
-  promise.then(function(events) {
+    findUsersById = db.model.user.find({
+        id: request.params.id
+    });
 
-      if (events.length < 1) {
-        throw boom.notFound('User not found');
-      }
+    promise = findUsersById.exec();
+    promise.then(function(events) {
 
-      reply(events[0]);
+        if (events.length < 1) {
+            throw boom.notFound('User not found');
+        }
 
-    })
-    .then(null, function(err) {
-      if (err.isBoom) {
-        reply(err);
-      } else {
-        reply(boom.badImplementation(err));
-      }
+        reply(events[0]);
+
+    }).then(null, function(err) {
+
+        if (err.isBoom) {
+            reply(err);
+        } else {
+            reply(boom.badImplementation(err));
+        }
+
     });
 };

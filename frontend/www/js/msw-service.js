@@ -2,35 +2,36 @@ var app = angular.module('zurf');
 
 app.factory('MswService', ['$http', function($http) {
 
-  var apiKey = "U2LljDYhRF01T50f9ip52Ou6G5mQhzez";
-  var urlBase = "http://magicseaweed.com/api/" + apiKey + "/forecast/";
+    var apiKey = "U2LljDYhRF01T50f9ip52Ou6G5mQhzez";
+    var urlBase = "http://magicseaweed.com/api/" + apiKey + "/forecast/";
 
-  return {
+    return {
 
-    getLastForecast: function(id) {
+        getLastForecast: function(id) {
 
-      return $http.get(urlBase + "?spot_id=" + id)
-        .then(function(resp) {
+            return $http.get(urlBase + "?spot_id=" + id).then(function(resp) {
 
-          if (resp.data.error_response) {
-            throw new Error(resp.data.error_response);
-          }
+                var i;
 
-          var i;
+                if (resp.data.error_response) {
+                    throw new Error(resp.data.error_response);
+                }
 
-          for (i = 0; i < resp.data.length - 1; i++) {
-            if (resp.data[i].timestamp * 1000 > Date.now()) {
-              break;
-            }
-          }
+                for (i = 0; i < resp.data.length - 1; i++) {
+                    if (resp.data[i].timestamp * 1000 > Date.now()) {
+                        break;
+                    }
+                }
 
-          return resp.data[i];
+                return resp.data[i];
 
-        }).then(null, function(err) {
-          console.error('Error in MswService.getLastForecast() :', err);
-          throw err;
-        });
-    }
-  };
+            }).then(null, function(err) {
+
+                console.error('Error in MswService.getLastForecast() :', err);
+                throw err;
+
+            });
+        }
+    };
 
 }]);

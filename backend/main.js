@@ -21,7 +21,7 @@ db.init(dbURI, true);
  * Hapi Server
  */
 var server = Hapi.createServer(host, process.argv[2] || defaultPort, {
-  cors: true
+    cors: true
 });
 
 routes.load(server);

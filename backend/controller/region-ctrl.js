@@ -8,25 +8,25 @@ var boom = require('boom');
  * @param  {Reply} reply   The server reply
  */
 exports.getRegions = function(request, reply) {
-  var findRegions = db.model.region.find()
-    .sort('id')
-    .find({});
-  var promise = findRegions.exec();
 
-  promise.then(function(events) {
+    var findRegions = db.model.region.find().sort('id').find({});
+    var promise = findRegions.exec();
 
-      if (events.length < 1) {
-        throw boom.notFound('No regions found');
-      }
+    promise.then(function(events) {
 
-      reply(events);
+        if (events.length < 1) {
+            throw boom.notFound('No regions found');
+        }
 
-    })
-    .then(null, function(err) {
-      if (err.isBoom) {
-        reply(err);
-      } else {
-        reply(boom.badImplementation(err));
-      }
+        reply(events);
+
+    }).then(null, function(err) {
+
+        if (err.isBoom) {
+            reply(err);
+        } else {
+            reply(boom.badImplementation(err));
+        }
+
     });
 };

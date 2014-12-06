@@ -8,14 +8,17 @@ var regionCtrl = require('./controller/region-ctrl');
  * @param  {Hapi.Server} server The hapi server
  */
 exports.load = function(server) {
-  console.log('Loading server routes');
-  exports.root(server);
-  exports.users(server);
-  exports.user(server);
-  exports.regions(server);
-  exports.spots(server);
-  exports.spotsByRegion(server);
-  exports.spot(server);
+
+    console.log('Loading server routes');
+
+    exports.root(server);
+    exports.users(server);
+    exports.user(server);
+    exports.regions(server);
+    exports.spots(server);
+    exports.spotsByRegion(server);
+    exports.spot(server);
+
 };
 
 /**
@@ -23,16 +26,18 @@ exports.load = function(server) {
  * @param  {Hapi.Server} server The hapi server
  */
 exports.root = function(server) {
-  // Set root route
-  server.route({
-    method: 'GET',
-    path: '/',
-    handler: function(request, reply) {
-      reply({
-        message: "Zurf API"
-      });
-    }
-  });
+
+    // Set root route
+    server.route({
+        method: 'GET',
+        path: '/',
+        handler: function(request, reply) {
+            reply({
+                message: "Zurf API"
+            });
+        }
+    });
+
 };
 
 /**
@@ -40,12 +45,15 @@ exports.root = function(server) {
  * @param  {Hapi.Server} server The hapi server
  */
 exports.users = function(server) {
-  console.log('Route GET /users');
-  server.route({
-    method: 'GET',
-    path: '/users',
-    handler: userCtrl.getUserList
-  });
+
+    console.log('Route GET /users');
+
+    server.route({
+        method: 'GET',
+        path: '/users',
+        handler: userCtrl.getUserList
+    });
+
 };
 
 /**
@@ -53,19 +61,22 @@ exports.users = function(server) {
  * @param  {Hapi.Server} server The hapi server
  */
 exports.user = function(server) {
-  console.log('Route GET /users/{id}');
-  server.route({
-    method: 'GET',
-    path: '/users/{id}',
-    handler: userCtrl.getUser,
-    config: {
-        validate: {
-            params: {
-                id: joi.number().integer().min(1).max(9999)
+
+    console.log('Route GET /users/{id}');
+
+    server.route({
+        method: 'GET',
+        path: '/users/{id}',
+        handler: userCtrl.getUser,
+        config: {
+            validate: {
+                params: {
+                    id: joi.number().integer().min(1).max(9999)
+                }
             }
         }
-    }
-  });
+    });
+
 };
 
 /**
@@ -73,12 +84,15 @@ exports.user = function(server) {
  * @param  {Hapi.Server} server The hapi server
  */
 exports.regions = function(server) {
-  console.log('Route GET /regions');
-  server.route({
-    method: 'GET',
-    path: '/regions',
-    handler: regionCtrl.getRegions
-  });
+
+    console.log('Route GET /regions');
+
+    server.route({
+        method: 'GET',
+        path: '/regions',
+        handler: regionCtrl.getRegions
+    });
+
 };
 
 
@@ -87,12 +101,15 @@ exports.regions = function(server) {
  * @param  {Hapi.Server} server The hapi server
  */
 exports.spots = function(server) {
-  console.log('Route GET /spots');
-  server.route({
-    method: 'GET',
-    path: '/spots',
-    handler: spotCtrl.getSpotList
-  });
+
+    console.log('Route GET /spots');
+
+    server.route({
+        method: 'GET',
+        path: '/spots',
+        handler: spotCtrl.getSpotList
+    });
+
 };
 
 /**
@@ -100,19 +117,22 @@ exports.spots = function(server) {
  * @param  {Hapi.Server} server The hapi server
  */
 exports.spot = function(server) {
-  console.log('Route GET /spots/{id}');
-  server.route({
-    method: 'GET',
-    path: '/spots/{id}',
-    handler: spotCtrl.getSpot,
-    config: {
-        validate: {
-            params: {
-                id: joi.number().integer().min(1).max(9999)
+
+    console.log('Route GET /spots/{id}');
+
+    server.route({
+        method: 'GET',
+        path: '/spots/{id}',
+        handler: spotCtrl.getSpot,
+        config: {
+            validate: {
+                params: {
+                    id: joi.number().integer().min(1).max(9999)
+                }
             }
         }
-    }
-  });
+    });
+
 };
 
 /**
@@ -120,17 +140,20 @@ exports.spot = function(server) {
  * @param  {Hapi.Server} server The hapi server
  */
 exports.spotsByRegion = function(server) {
-  console.log('Route GET /spots/region/{id}');
-  server.route({
-    method: 'GET',
-    path: '/spots/region/{id}',
-    handler: spotCtrl.getSpotsByRegion,
-    config: {
-        validate: {
-            params: {
-                id: joi.number().integer().min(1).max(9999)
+
+    console.log('Route GET /spots/region/{id}');
+
+    server.route({
+        method: 'GET',
+        path: '/spots/region/{id}',
+        handler: spotCtrl.getSpotsByRegion,
+        config: {
+            validate: {
+                params: {
+                    id: joi.number().integer().min(1).max(9999)
+                }
             }
         }
-    }
-  });
+    });
+
 };

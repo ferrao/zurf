@@ -7,25 +7,26 @@ var boom = require('boom');
  * @param  {Reply} reply   The server reply
  */
 exports.getSpotList = function(request, reply) {
-  var findSpots = db.model.spot.find({});
-  var promise = findSpots.exec();
 
-  promise.then(function(events) {
+    var findSpots = db.model.spot.find({});
+    var promise = findSpots.exec();
 
-      if (events < 1) {
-        throw boom.notFound("No spots found");
-      }
+    promise.then(function(events) {
 
-      reply(events);
+        if (events < 1) {
+            throw boom.notFound("No spots found");
+        }
 
-    })
-    .then(null, function(err) {
+        reply(events);
 
-      if (err.isBoom) {
-        reply(err);
-      } else {
-        reply(boom.badImplementation(err));
-      }
+    }).then(null, function(err) {
+
+        if (err.isBoom) {
+            reply(err);
+        } else {
+            reply(boom.badImplementation(err));
+        }
+
     });
 };
 
@@ -37,48 +38,49 @@ exports.getSpotList = function(request, reply) {
  */
 exports.getSpotsByRegion = function(request, reply) {
 
-  if (!request.params.id) {
-    reply(boom.notFound());
-    return;
-  }
+    var getRegionSpots, promise, ids, findSpotsByIds;
 
-  var getRegionSpots = db.model.region.find({
-      id: request.params.id
-    })
-    .select('spots');
-  var promise = getRegionSpots.exec();
+    if (!request.params.id) {
+        reply(boom.notFound());
+        return;
+    }
 
-  promise.then(function(events) {
+    getRegionSpots = db.model.region.find({
+        id: request.params.id
+    }).select('spots');
 
-      if (events.length < 1) {
-        throw boom.notFound('Region not found');
-      }
+    promise = getRegionSpots.exec();
+    promise.then(function(events) {
 
-      var ids = events[0].spots;
-      var findSpotsByIds = db.model.spot.find({
-        id: {
-          $in: ids
+        if (events.length < 1) {
+            throw boom.notFound('Region not found');
         }
-      });
 
-      return findSpotsByIds.exec();
+        ids = events[0].spots;
+        findSpotsByIds = db.model.spot.find({
+            id: {
+                $in: ids
+            }
+        });
 
-    })
-    .then(function(events) {
+        return findSpotsByIds.exec();
 
-      if (events.length < 1) {
-        throw boom.notFound('No spots found');
-      }
+    }).then(function(events) {
 
-      reply(events);
+        if (events.length < 1) {
+            throw boom.notFound('No spots found');
+        }
 
-    })
-    .then(null, function(err) {
-      if (err.isBoom) {
-        reply(err);
-      } else {
-        reply(boom.badImplementation(err));
-      }
+        reply(events);
+
+    }).then(null, function(err) {
+
+        if (err.isBoom) {
+            reply(err);
+        } else {
+            reply(boom.badImplementation(err));
+        }
+
     });
 };
 
@@ -89,30 +91,33 @@ exports.getSpotsByRegion = function(request, reply) {
  */
 exports.getSpot = function(request, reply) {
 
-  if (!request.params.id) {
-    reply(boom.notFound());
-    return;
-  }
+    var findSpotsById, promise;
 
-  var findSpotsById = db.model.spot.find({
-    id: request.params.id
-  });
-  var promise = findSpotsById.exec();
+    if (!request.params.id) {
+        reply(boom.notFound());
+        return;
+    }
 
-  promise.then(function(events) {
+    findSpotsById = db.model.spot.find({
+        id: request.params.id
+    });
 
-      if (events.length < 1) {
-        throw boom.notFound("Spot not found");
-      }
+    promise = findSpotsById.exec();
+    promise.then(function(events) {
 
-      reply(events[0]);
+        if (events.length < 1) {
+            throw boom.notFound("Spot not found");
+        }
 
-    })
-    .then(null, function(err) {
-      if (err.isBoom) {
-        reply(err);
-      } else {
-        reply(boom.badImplementation(err));
-      }
+        reply(events[0]);
+
+    }).then(null, function(err) {
+
+        if (err.isBoom) {
+            reply(err);
+        } else {
+            reply(boom.badImplementation(err));
+        }
+
     });
 };
