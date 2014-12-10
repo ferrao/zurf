@@ -1,6 +1,9 @@
-<ion-view title="Login">
-    <ion-content>
-        <div class="list">
+<ion-view title="Zurf!" hide-back-button="true">
+    <ion-content class="" scroll="false">
+        <div class="item-body">
+            <h5>A social touch on a mobile surfing app!</h5>
+        </div>
+        <div class="padding list">
             <label class="item item-input">
                 <span class="input-label">Username</span>
                 <input type="text" ng-model="user.username">
@@ -12,7 +15,14 @@
         </div>
         <div class="padding">
             <button class="button button-block button-positive" ng-click="login(user)">
-                Sign-In
+                SIGN IN
+            </button>
+            <button class="button button-block button-dark" ng-click="login(user)">
+                SIGN UP
+            </button>
+             <button class="button button-block button-light" ng-click="fbLogin()">
+                <i class="icon ion-social-facebook"></i>
+                &nbsp;Login with Facebook
             </button>
             <p class="text-center">
                 <a href="#/forgot">Forgot password</a>
