@@ -2,9 +2,7 @@ angular.module('zurf', ['ionic', 'openfb'])
 
 .run(function($ionicPlatform, OpenFB) {
 
-    OpenFB.init({
-        appId: '719366851480896'
-    });
+    OpenFB.init('719366851480896', document.location.origin + '/lib/openfb/oauthcallback.html');
 
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
